@@ -1,8 +1,10 @@
 dotvim
 ======
 
-Put this in your $HOME/.vim directory for instant bells and wistles for Vim. 
-This setup primarily targets Python development in Vim.
+Put all this into your $HOME/.vim directory for instant bells and whistles for Vim. 
+
+This setup primarily targets Python development in Vim. Essentially it's a
+Vim-centric Python development environment.
 
 
 Install
