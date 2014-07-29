@@ -40,6 +40,8 @@ import pprint
 
 from . import devhelpers
 
+pyterm = devhelpers.pyterm
+xterm = devhelpers.xterm
 
 EXECTEMP = "/var/tmp/python_vim_temp_%s.py" % (os.getpid())
 
