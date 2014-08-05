@@ -11,7 +11,8 @@ let g:pyindent_nested_paren = '&sw' * 2
 
 python3 sys.path.insert(0, os.path.expandvars("$HOME/.vim"))
 
-compiler pyunit
+" compiler pyunit
+compiler pylint
 
 " set Vim parameters that suite python best
 set tm=2000
