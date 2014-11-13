@@ -1,10 +1,17 @@
-"
-
 if has("python3")
 	python3 import sys
 	python3 import os
 	python3 import vim
 	python3 sys.argv = [vim.eval("v:progname")] 
+	python3 sys.path.insert(0, os.path.expandvars("$HOME/.vim/py3"))
+endif
+
+if has("python")
+	python import sys
+	python import os
+	python import vim
+	python sys.argv = [vim.eval("v:progname")] 
+	python sys.path.insert(0, os.path.expandvars("$HOME/.vim/py2"))
 endif
 
 set nocompatible	" Use Vim defaults (much better!)
@@ -72,16 +79,14 @@ augroup cprog
 augroup END
 
 augroup pydev
+if has("python3")
   autocmd FileType python :ru pydev.vim
   autocmd FileType pyrex  :ru pydev.vim
-augroup END
-
-augroup pycopia
-  autocmd FileType html		:ru html.vim
-  autocmd FileType xhtml	:ru html.vim
-  autocmd FileType dtd		:ru xml_dtd.vim
-  autocmd FileType xml		:ru xml.vim
-  autocmd FileType javascript	:ru jsdev.vim
+endif
+if has("python")
+  autocmd FileType python :ru pydev2.vim
+  autocmd FileType pyrex  :ru pydev2.vim
+endif
 augroup END
 
 augroup newfile
@@ -93,10 +98,6 @@ augroup newfile
   autocmd BufNewFile            *.rst   0r      ~/Templates/RST.rst
 augroup END
 
-
-if &diff
-   nmap ZZ :qall<CR>
-endif
 
 if v:progname == "mvim"
 	set cursorcolumn
@@ -117,6 +118,11 @@ if v:progname == "svim"
        nmap <Esc>[3~ :bd<CR>
        nmap ZZ :bd<CR>
 endif
+
+if &diff
+   nmap ZZ :qall<CR>
+endif
+
 
 map <Leader>td <Plug>TaskList
 map <Leader>g :GundoToggle<CR>
