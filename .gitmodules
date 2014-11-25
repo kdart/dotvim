@@ -49,3 +49,6 @@
 [submodule "bundle/pylint"]
 	path = bundle/pylint
 	url = https://github.com/vim-scripts/pylint.vim.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git

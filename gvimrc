@@ -7,7 +7,7 @@ set visualbell
 set number
 
 set encoding=utf-8
-set guifont=Andale\ Mono\ 10
+set guifont=Andale\ Mono\ 12
 
 " winpos 600 30
 
@@ -33,14 +33,16 @@ set mousefocus
 
 colorscheme kwdcolors
 
-if v:progname == "mvim"
+if v:progname == "Vim"
+	set cursorcolumn
 	map <M-Left> :bp<CR>
 	map <M-Right> :bn<CR>
 	map <M-Del> :bd<CR>
 	map ZZ :bd<CR>
 endif
 
-if v:progname == "gvimdiff" || v:progname == "gviewdiff"
-        set columns=212
+if &diff
+   set columns=212
+   nmap ZZ :qall<CR>
 endif
 
