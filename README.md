@@ -14,5 +14,5 @@ Install
     $ mkdir ~/.vim
     $ cd .vim
     $ git clone https://github.com/kdart/dotvim.git .
-    $ git submodule update --init
+    $ git submodule update --init --recursive
 
