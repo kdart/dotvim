@@ -33,7 +33,8 @@ set mousefocus
 
 colorscheme kwdcolors
 
-if v:progname == "Vim"
+" mvim is a symlink to gvim that's short for multi-buffer gvim. Vim is MacVim
+if v:progname == "Vim" || v:progname == "mvim"
 	set cursorcolumn
 	map <M-Left> :bp<CR>
 	map <M-Right> :bn<CR>

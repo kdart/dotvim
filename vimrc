@@ -99,12 +99,13 @@ augroup newfile
 augroup END
 
 
+" mvim is a symlink to gvim that's short for multi-buffer gvim
 if v:progname == "mvim"
 	set cursorcolumn
 	gui
 endif
 
-" Enable menus in console vim
+" Enable menus in console vim, or screen-vim (symlinked as svim)
 if v:progname == "svim"
         source $VIMRUNTIME/menu.vim
         set wildmenu
