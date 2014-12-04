@@ -8,6 +8,7 @@ if exists("g:Python_loaded")
 endif
 let g:Python_loaded = 1
 let g:pyindent_nested_paren = '&sw' * 2
+let g:pylint_onwrite = 0
 
 
 " compiler pyunit
