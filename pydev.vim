@@ -30,7 +30,7 @@ set cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 " set up 4 space spacing, flag in red bad whitespace.
 function PyUseSpaces()
     hi SpecialKey guifg=Red
-    :set ts=4 sw=4 tw=100
+    :set ts=4 sw=4 tw=80
     :set expandtab softtabstop=4 smarttab
     :set listchars=trail:■,extends:>,precedes:<,tab:❱➝ list
 endfunction

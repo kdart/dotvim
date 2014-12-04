@@ -29,7 +29,7 @@ set cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 " set up 4 space spacing, flag in red bad whitespace.
 function PyUseSpaces()
     hi SpecialKey guifg=Red
-    :set ts=4 sw=4 tw=100
+    :set ts=4 sw=4 tw=79
     :set expandtab softtabstop=4 smarttab
     :set listchars=trail:■,extends:>,precedes:<,tab:❱➝ list
 endfunction
@@ -37,7 +37,7 @@ endfunction
 " set up 2 space spacing for Google style.
 function GoogleSpaces()
     hi SpecialKey guifg=Red
-    :set ts=2 sw=2 tw=74
+    :set ts=2 sw=2 tw=79
     :set expandtab softtabstop=2 smarttab
     :set listchars=trail:■,extends:>,precedes:<,tab:❱➝ list
 endfunction
@@ -105,4 +105,5 @@ nmap <LocalLeader>cl :call PyClean()<CR>
 map <LocalLeader>j :RopeGotoDefinition<CR>
 map <LocalLeader>r :RopeRename<CR>
 
+map <buffer> <F8> :call Flake8()<CR>
 

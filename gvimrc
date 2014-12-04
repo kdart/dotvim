@@ -23,6 +23,8 @@ set background="dark"
   " Switch on syntax highlighting.
 syntax enable
 
+set colorcolumn=+1
+
   " Switch on search pattern highlighting.
 set hlsearch
 :map <F7> :set hls!<CR>
