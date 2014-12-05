@@ -133,4 +133,7 @@ let g:snips_author = 'Keith Dart'
 let g:pyflakes_use_quickfix = 0
 let g:pep8_map='<leader>8'
 
+let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
