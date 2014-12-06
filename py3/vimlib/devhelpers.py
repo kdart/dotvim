@@ -38,8 +38,7 @@ import re
 import imp
 
 PYTHONBIN = os.environ.get("PYTHONBIN", sys.executable)
-#XTERM = os.environ.get("XTERM", "/usr/local/bin/urxvt -title Python -name Python -e")
-XTERM = "/usr/local/bin/urxvt -title Python -name Python -e"
+XTERM = os.environ.get("XTERM", "/usr/bin/urxvt -title Python -name Python -e")
 EDITOR = os.environ.get("EDITOR", "/usr/bin/vim")
 VIEWER = os.environ.get("VIEWER", "/usr/bin/view")
 XEDITOR = os.environ.get("XEDITOR", "/usr/bin/gvim")
