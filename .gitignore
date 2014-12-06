@@ -1,3 +1,4 @@
 tags
 viminfo
 __pycache__
+*.pyc

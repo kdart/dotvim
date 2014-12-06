@@ -1,17 +1,9 @@
-if has("python3")
+
+if has("python2") || has("python3")
 	python3 import sys
 	python3 import os
 	python3 import vim
 	python3 sys.argv = [vim.eval("v:progname")] 
-	python3 sys.path.insert(0, os.path.expandvars("$HOME/.vim/py3"))
-endif
-
-if has("python")
-	python import sys
-	python import os
-	python import vim
-	python sys.argv = [vim.eval("v:progname")] 
-	python sys.path.insert(0, os.path.expandvars("$HOME/.vim/py2"))
 endif
 
 set nocompatible	" Use Vim defaults (much better!)
