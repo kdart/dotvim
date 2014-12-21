@@ -57,7 +57,6 @@ set cpo&vim
 " Exceptions come last at the end of each group (class and def below).
 "
 " Keywords 'with' and 'as' are new in Python 2.6
-" (use 'from __future__ import with_statement' in Python 2.5).
 "
 " Some compromises had to be made to support both Python 3.0 and 2.6.
 " We include Python 3.0 features, but when a definition is duplicated,
@@ -185,21 +184,14 @@ if !exists("python_no_builtin_highlight")
   syn keyword pythonBuiltin	property range repr reversed round set
   syn keyword pythonBuiltin	setattr slice sorted staticmethod str
   syn keyword pythonBuiltin	sum super tuple type vars zip __import__
-  " Python 2.6 only
+  syn keyword pythonBuiltin	__loader__
   syn keyword pythonBuiltin	basestring callable cmp execfile file
   syn keyword pythonBuiltin	long raw_input reduce reload unichr
   syn keyword pythonBuiltin	unicode xrange
-  " Python 3.0 only
   syn keyword pythonBuiltin	ascii bytearray bytes exec memoryview
-  " non-essential built-in functions; Python 2.6 only
   syn keyword pythonBuiltin	apply buffer coerce intern
-  " following are commonly used in Pycopia code, from the pycopia.aid module.
-  syn keyword pythonBuiltin	reorder pprint_list IF
-  syn keyword pythonBuiltin	Queue Stack removedups YES NO 
-  syn keyword pythonBuiltin	mapstr Enum Enums add_exception Write str2hex  
-  syn keyword pythonBuiltin	partial newclass NULL unsigned unsigned64 sortedlist
-  syn keyword pythonBuiltin	sgn add2builtin 
 endif
+
 
 " From the 'Python Library Reference' class hierarchy at the bottom.
 " http://docs.python.org/library/exceptions.html
@@ -208,8 +200,6 @@ if !exists("python_no_exception_highlight")
   syn keyword pythonExceptions	BaseException Exception
   syn keyword pythonExceptions	ArithmeticError EnvironmentError
   syn keyword pythonExceptions	LookupError
-  " builtin base exception removed in Python 3.0
-  syn keyword pythonExceptions	StandardError
   " builtin exceptions (actually raised)
   syn keyword pythonExceptions	AssertionError AttributeError BufferError
   syn keyword pythonExceptions	EOFError FloatingPointError GeneratorExit
@@ -223,34 +213,54 @@ if !exists("python_no_exception_highlight")
   syn keyword pythonExceptions	UnicodeDecodeError UnicodeEncodeError
   syn keyword pythonExceptions	UnicodeTranslateError ValueError VMSError
   syn keyword pythonExceptions	WindowsError ZeroDivisionError
+  syn keyword pythonExceptions	BlockingIOError BrokenPipeError
+  syn keyword pythonExceptions	ChildProcessError ConnectionAbortedError
+  syn keyword pythonExceptions	ConnectionError ConnectionRefusedError
+  syn keyword pythonExceptions	ConnectionResetError FileExistsError
+  syn keyword pythonExceptions	FileNotFoundError InterruptedError
+  syn keyword pythonExceptions	IsADirectoryError NotADirectoryError
+  syn keyword pythonExceptions	PermissionError ProcessLookupError TimeoutError
   " builtin warnings
   syn keyword pythonExceptions	BytesWarning DeprecationWarning FutureWarning
   syn keyword pythonExceptions	ImportWarning PendingDeprecationWarning
   syn keyword pythonExceptions	RuntimeWarning SyntaxWarning UnicodeWarning
-  syn keyword pythonExceptions	UserWarning Warning
+  syn keyword pythonExceptions	UserWarning Warning ResourceWarning
 endif
 
-syn keyword pyDebug            __debug__ DEBUG
 syn keyword pyBuiltinVariable  __bases__ __class__ __doc__ __slots__
 syn keyword pyBuiltinVariable  __file__ __name__ __methods__ __members__
 syn keyword pyBuiltinVariable  __module__ __self__ __package__ __builtins__
 
 " all of the special methods. So you know you got the right one. 8-)
-syn keyword pySpecialMethod __abs__ __add__ __and__ __call__ __closure__ __cmp__ __code__
-syn keyword pySpecialMethod __del__ __getstate__ __setstate__ __complex__
-syn keyword pySpecialMethod __coerce__ __contains__ __defaults__ __delattr__ __delitem__ __delslice__
-syn keyword pySpecialMethod __dict__ __div__ __divmod__ __enter__ __eq__ __exit__ __float__
-syn keyword pySpecialMethod __floordiv__ __format__ __ge__ __get__ __getattribute__ __getitem__
-syn keyword pySpecialMethod __getnewargs__ __getslice__ __globals__ __gt__ __hash__ __hex__ __iadd__
-syn keyword pySpecialMethod __iand__ __imul__ __index__ __init__ __int__ __invert__ __ior__ __isub__
-syn keyword pySpecialMethod __iter__ __ixor__ __le__ __len__ __long__ __lshift__ __lt__ __mod__
-syn keyword pySpecialMethod __mul__ __ne__ __neg__ __new__ __nonzero__ __oct__ __or__ __pos__
-syn keyword pySpecialMethod __pow__ __radd__ __rand__ __rdiv__ __rdivmod__ __reduce__ __reduce_ex__
-syn keyword pySpecialMethod __repr__ __reversed__ __rfloordiv__ __rlshift__ __rmod__ __rmul__ __ror__
-syn keyword pySpecialMethod __rpow__ __rrshift__ __rshift__ __rsub__ __rtruediv__ __rxor__ __setattr__
-syn keyword pySpecialMethod __setitem__ __setslice__ __sizeof__ __str__ __sub__ __subclasshook__
-syn keyword pySpecialMethod __truediv__ __trunc__ __weakref__ __xor__
-syn keyword pySpecialMethod __next__
+syn keyword pySpecialMethod __abs__ __add__ __and__ __bytes__ __call__
+syn keyword pySpecialMethod __closure__ __cmp__ __code__ __del__ __getstate__
+syn keyword pySpecialMethod __setstate__ __complex__ __coerce__ __contains__
+syn keyword pySpecialMethod __defaults__ __delattr__ __delitem__ __delslice__
+syn keyword pySpecialMethod __dict__ __div__ __divmod__ __enter__ __eq__
+syn keyword pySpecialMethod __exit__ __float__ __floordiv__ __format__ __ge__
+syn keyword pySpecialMethod __get__ __getattribute__ __getitem__
+syn keyword pySpecialMethod __getnewargs__ __getslice__ __globals__ __gt__
+syn keyword pySpecialMethod __hash__ __hex__ __iadd__ __iand__ __imul__
+syn keyword pySpecialMethod __index__ __init__ __int__ __invert__ __ior__
+syn keyword pySpecialMethod __isub__ __iter__ __ixor__ __le__ __len__ __long__
+syn keyword pySpecialMethod __lshift__ __lt__ __mod__ __mul__ __ne__ __neg__
+syn keyword pySpecialMethod __new__ __nonzero__ __oct__ __or__ __pos__ __pow__
+syn keyword pySpecialMethod __radd__ __rand__ __rdiv__ __rdivmod__ __reduce__
+syn keyword pySpecialMethod __reduce_ex__ __repr__ __reversed__ __rfloordiv__
+syn keyword pySpecialMethod __rlshift__ __rmod__ __rmul__ __ror__ __rpow__
+syn keyword pySpecialMethod __rrshift__ __rshift__ __rsub__ __rtruediv__
+syn keyword pySpecialMethod __rxor__ __setattr__ __setitem__ __setslice__
+syn keyword pySpecialMethod __sizeof__ __str__ __sub__ __subclasshook__
+syn keyword pySpecialMethod __truediv__ __trunc__ __weakref__ __xor__ __next__
+syn keyword pySpecialMethod __dir__
+syn keyword pySpecialMethod __abstractmethods__ __all__ __base__ __basicsize__
+syn keyword pySpecialMethod __bool__ __build_class__ __cached__ __ceil__
+syn keyword pySpecialMethod __dictoffset__ __flags__ __floor__ __getformat__
+syn keyword pySpecialMethod __instancecheck__ __itemsize__ __mro__ __prepare__
+syn keyword pySpecialMethod __qualname__ __round__ __setformat__ __spec__
+syn keyword pySpecialMethod __subclasscheck__ __subclasses__
+syn keyword pySpecialMethod __text_signature__ __weakrefoffset__
+syn keyword pySpecialMethod __missing__
 
 " names used by convention, such as self, that are often boilerplate and can be de-emphasized.
 syn keyword pyConvention self
