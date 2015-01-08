@@ -13,6 +13,11 @@ Install
 
     $ mkdir ~/.vim
     $ cd .vim
+    $ # Don't forget the dot on the end.
     $ git clone https://github.com/kdart/dotvim.git .
     $ git submodule update --init --recursive
+    $ cd bundle/YouCompleteMe
+    $ ./install.sh 
+    
+Also make sure you don't have the same set of plugins installed from elsewhere.
 
