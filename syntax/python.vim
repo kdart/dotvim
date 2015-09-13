@@ -73,12 +73,15 @@ set cpo&vim
 syn keyword pythonStatement	False, None, True
 syn keyword pythonStatement	as assert break continue del exec global
 syn keyword pythonStatement	nonlocal pass return with yield
-syn keyword pythonStructure	lambda class def nextgroup=pythonFunction skipwhite
+syn keyword pythonStatement	await
+syn keyword pythonStructure	lambda async class def nextgroup=pythonFunction skipwhite
 syn keyword pythonConditional	elif else if
 syn keyword pythonRepeat	for while
 syn keyword pythonOperator	and in is not or
 syn keyword pythonException	except finally raise try
 syn keyword pythonInclude	from import
+
+
 
 " Decorators (new in Python 2.4)
 syn match   pythonDecorator	"@" display nextgroup=pythonFunction skipwhite
@@ -173,6 +176,7 @@ if !exists("python_no_builtin_highlight")
   " 'False', 'True', and 'None' are also reserved words in Python 3.0
   syn keyword pythonBuiltin	False True None print
   syn keyword pythonBuiltin	NotImplemented Ellipsis __debug__
+
   " built-in functions
   syn keyword pythonBuiltin	abs all any bin bool chr classmethod
   syn keyword pythonBuiltin	compile complex delattr dict dir divmod
@@ -184,31 +188,28 @@ if !exists("python_no_builtin_highlight")
   syn keyword pythonBuiltin	property range repr reversed round set
   syn keyword pythonBuiltin	setattr slice sorted staticmethod str
   syn keyword pythonBuiltin	sum super tuple type vars zip __import__
-  syn keyword pythonBuiltin	__loader__
+  syn keyword pythonBuiltin	__loader__ __build_class__
   syn keyword pythonBuiltin	basestring callable cmp execfile file
   syn keyword pythonBuiltin	long raw_input reduce reload unichr
   syn keyword pythonBuiltin	unicode xrange
   syn keyword pythonBuiltin	ascii bytearray bytes exec memoryview
-  syn keyword pythonBuiltin	apply buffer coerce intern
+  syn keyword pythonBuiltin	apply buffer coerce intern exit
 endif
-
 
 " From the 'Python Library Reference' class hierarchy at the bottom.
 " http://docs.python.org/library/exceptions.html
 if !exists("python_no_exception_highlight")
   " builtin base exceptions (only used as base classes for other exceptions)
-  syn keyword pythonExceptions	BaseException Exception
-  syn keyword pythonExceptions	ArithmeticError EnvironmentError
-  syn keyword pythonExceptions	LookupError
+  syn keyword pythonExceptions	BaseException Exception EnvironmentError
   " builtin exceptions (actually raised)
   syn keyword pythonExceptions	AssertionError AttributeError BufferError
-  syn keyword pythonExceptions	EOFError FloatingPointError GeneratorExit
+  syn keyword pythonExceptions	EOFError FloatingPointError
   syn keyword pythonExceptions	IOError ImportError IndentationError
-  syn keyword pythonExceptions	IndexError KeyError KeyboardInterrupt
+  syn keyword pythonExceptions	IndexError KeyError
   syn keyword pythonExceptions	MemoryError NameError NotImplementedError
   syn keyword pythonExceptions	OSError OverflowError ReferenceError
-  syn keyword pythonExceptions	RuntimeError StopIteration SyntaxError
-  syn keyword pythonExceptions	SystemError SystemExit TabError TypeError
+  syn keyword pythonExceptions	RuntimeError SyntaxError
+  syn keyword pythonExceptions	SystemError TabError TypeError
   syn keyword pythonExceptions	UnboundLocalError UnicodeError
   syn keyword pythonExceptions	UnicodeDecodeError UnicodeEncodeError
   syn keyword pythonExceptions	UnicodeTranslateError ValueError VMSError
@@ -220,19 +221,25 @@ if !exists("python_no_exception_highlight")
   syn keyword pythonExceptions	FileNotFoundError InterruptedError
   syn keyword pythonExceptions	IsADirectoryError NotADirectoryError
   syn keyword pythonExceptions	PermissionError ProcessLookupError TimeoutError
+  syn keyword pythonExceptions	ArithmeticError LookupError RecursionError
   " builtin warnings
   syn keyword pythonExceptions	BytesWarning DeprecationWarning FutureWarning
   syn keyword pythonExceptions	ImportWarning PendingDeprecationWarning
   syn keyword pythonExceptions	RuntimeWarning SyntaxWarning UnicodeWarning
   syn keyword pythonExceptions	UserWarning Warning ResourceWarning
+  " control flow exceptions
+  syn keyword pythonExceptions	GeneratorExit KeyboardInterrupt StopIteration
+  syn keyword pythonExceptions	SystemExit
 endif
 
 syn keyword pyBuiltinVariable  __bases__ __class__ __doc__ __slots__
 syn keyword pyBuiltinVariable  __file__ __name__ __methods__ __members__
 syn keyword pyBuiltinVariable  __module__ __self__ __package__ __builtins__
+syn keyword pyBuiltinVariable  __spec__
 
 " all of the special methods. So you know you got the right one. 8-)
 syn keyword pySpecialMethod __abs__ __add__ __and__ __bytes__ __call__
+syn keyword pySpecialMethod __await__ __aenter__ __aexit__ __aiter__
 syn keyword pySpecialMethod __closure__ __cmp__ __code__ __del__ __getstate__
 syn keyword pySpecialMethod __setstate__ __complex__ __coerce__ __contains__
 syn keyword pySpecialMethod __defaults__ __delattr__ __delitem__ __delslice__
@@ -254,16 +261,18 @@ syn keyword pySpecialMethod __sizeof__ __str__ __sub__ __subclasshook__
 syn keyword pySpecialMethod __truediv__ __trunc__ __weakref__ __xor__ __next__
 syn keyword pySpecialMethod __dir__
 syn keyword pySpecialMethod __abstractmethods__ __all__ __base__ __basicsize__
-syn keyword pySpecialMethod __bool__ __build_class__ __cached__ __ceil__
+syn keyword pySpecialMethod __bool__ __cached__ __ceil__
 syn keyword pySpecialMethod __dictoffset__ __flags__ __floor__ __getformat__
 syn keyword pySpecialMethod __instancecheck__ __itemsize__ __mro__ __prepare__
-syn keyword pySpecialMethod __qualname__ __round__ __setformat__ __spec__
+syn keyword pySpecialMethod __qualname__ __round__ __setformat__
 syn keyword pySpecialMethod __subclasscheck__ __subclasses__
 syn keyword pySpecialMethod __text_signature__ __weakrefoffset__
 syn keyword pySpecialMethod __missing__
 
-" names used by convention, such as self, that are often boilerplate and can be de-emphasized.
-syn keyword pyConvention self
+
+" Names used by convention, such as self, that are often boilerplate and can
+" be de-emphasized.
+syn keyword pyConvention self cls
 
 if exists("python_space_error_highlight")
   " trailing whitespace
