@@ -94,10 +94,6 @@ nmap <LocalLeader>sp :python keyword_split()<CR>
 nmap <F9> :python keyword_split()<CR>
 nmap <LocalLeader>he :python keyword_help()<CR>
 
-" what shall it be? two or four space indents?
-nmap <LocalLeader>us :call PyUseSpaces()<CR>
-nmap <LocalLeader>ug :call GoogleSpaces()<CR>
-
 nmap <LocalLeader>ts :%retab<CR>
 vmap <LocalLeader>ts :'<,'>retab<CR>
 nmap <LocalLeader>cl :call PyClean()<CR>

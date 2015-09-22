@@ -90,6 +90,25 @@ augroup newfile
   autocmd BufNewFile            *.rst   0r      ~/Templates/RST.rst
 augroup END
 
+function UseSpaces()
+    hi SpecialKey guifg=Red
+    :set ts=4 sw=4 tw=80
+    :set expandtab softtabstop=4 smarttab
+    :set listchars=trail:■,extends:>,precedes:<,tab:❱➝ list
+endfunction
+
+function UseTabs()
+    hi SpecialKey guifg=Blue
+    :set ts=4 tw=80
+    :set noexpandtab
+    :set listchars=trail:■ nolist
+endfunction
+
+
+" what shall it be? two or four space indents?
+nmap <Leader>us :call UseSpaces()<CR>
+nmap <Leader>ut :call UseTabs()<CR>
+
 
 " mvim is a symlink to gvim that's short for multi-buffer gvim
 if v:progname == "mvim"
@@ -129,3 +148,4 @@ let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+let g:pylint_onwrite = 0
