@@ -10,9 +10,13 @@ let g:Python_loaded = 1
 let g:pyindent_nested_paren = '&sw' * 2
 let g:pylint_onwrite = 0
 
+function Py2()
+	let g:flake8_cmd=$HOME . "/bin/flake8-2.7"
+endfunction
 
-" compiler pyunit
-compiler pylint
+function Py3()
+	let g:flake8_cmd=$HOME . "/bin/flake8-3.4"
+endfunction
 
 " set Vim parameters that suite python best
 set tm=2000
@@ -20,10 +24,10 @@ set tm=2000
 set foldmethod=indent
 set foldlevel=99
 
-set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-let g:pydoc_cmd = '/usr/bin/pydoc3.4'
-set completeopt=menuone,longest,preview
+" set omnifunc=pythoncomplete#Complete
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:pydoc_cmd = '/usr/bin/pydoc2.7'
+" set completeopt=menuone,longest,preview
 
 set formatoptions=crql cino=(8#1 ai smartindent nowrap comments=:#
 set cinwords=if,elif,else,for,while,try,except,finally,def,class,with

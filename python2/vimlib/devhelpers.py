@@ -28,7 +28,7 @@ import re
 import imp
 
 PYTHONBIN = os.environ.get("PYTHONBIN", sys.executable)
-XTERM = os.environ.get("XTERM", "/usr/bin/urxvt -title Python -name Python -e")
+XTERM = os.environ.get("XTERM", "/usr/local/bin/urxvtc -title Python -name Python -e")
 EDITOR = os.environ.get("EDITOR", "/usr/bin/vim")
 VIEWER = os.environ.get("VIEWER", "/usr/bin/view")
 XEDITOR = os.environ.get("XEDITOR", "/usr/bin/gvim")
@@ -58,7 +58,7 @@ def run_command(cfstring, param):
     if not cfstring:
         print ("No command string defined to run {}.".format(param), file=sys.stderr)
         return
-    cmd = "{} {}".format(cfstring, param)
+    cmd = '{} "{}"'.format(cfstring, param)
     return os.system(cmd)
 
 
@@ -240,13 +240,14 @@ def module_from_path(fname):
     """Find and return the module name given a full path name.
     Return None if file name not in the package path.
     """
-    dirname, basename = os.path.split(fname)
-    for p in sys.path:
-        if fname.startswith(p):
-            pkgname = ".".join(dirname[len(p)+1:].split("/"))
-            if pkgname:
-                return pkgname + "." + os.path.splitext(basename)[0]
-            else:
-                return os.path.splitext(basename)[0]
+    if PYTHONBIN == sys.executable:
+        dirname, basename = os.path.split(fname)
+        for p in sys.path:
+            if fname.startswith(p):
+                pkgname = ".".join(dirname[len(p)+1:].split("/"))
+                if pkgname:
+                    return pkgname + "." + os.path.splitext(basename)[0]
+                else:
+                    return os.path.splitext(basename)[0]
     return None
 

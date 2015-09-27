@@ -7,10 +7,8 @@ if exists("g:Python_loaded")
   finish
 endif
 let g:Python_loaded = 1
-let g:pyindent_nested_paren = '&sw' * 2
 
-" compiler pyunit
-compiler pylint
+let g:pyindent_nested_paren = '&sw' * 2
 
 " set Vim parameters that suite python best
 set tm=2000
@@ -20,7 +18,6 @@ set foldlevel=99
 
 set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
-let g:pydoc_cmd = '/usr/bin/pydoc2.7'
 set completeopt=menuone,longest,preview
 
 set formatoptions=crql cino=(8#1 ai smartindent nowrap comments=:#
@@ -45,13 +42,26 @@ endfunction
 " by default, use 4 spaces (PEP-8 style)
 :call PyUseSpaces()
 
-
 :python import os
 :python from vimlib.pydev import *
 " put VIMSERVER in environment for child python processes to use.
 if has("gui_gtk") && has("gui_running")
     :py os.environ["VIMSERVER"] = vim.eval("v:servername")
 endif
+
+function Py2()
+	let g:flake8_cmd=$HOME . "/bin/flake8-2.7"
+	let g:pydoc_cmd = '/usr/bin/pydoc2.7'
+    let $PYTHONBIN = "/usr/bin/python2.7"
+    python devhelpers.PYTHONBIN = "/usr/bin/python2.7"
+endfunction
+
+function Py3()
+	let g:flake8_cmd=$HOME . "/bin/flake8-3.4"
+	let g:pydoc_cmd = "/usr/local/bin/pydoc3.4"
+    let $PYTHONBIN = "/usr/local/bin/python3.4"
+    python devhelpers.PYTHONBIN = "/usr/local/bin/python3.4"
+endfunction
 
 function! PyClean ()
     normal ma
@@ -60,8 +70,14 @@ function! PyClean ()
     normal 'a
 endfunction
 
+let firstline = getline(1)
+if firstline =~ 'python2'
+    call Py2()
+elseif firstline =~ 'python3'
+    call Py3()
+endif
+
 nmenu Python.Syntax.Use\ Spaces :call PyUseSpaces()<CR>
-nmenu Python.Syntax.Use\ Google :call GoogleSpaces()<CR>
 nmenu Python.Syntax.No\ Tabs\ (:retab) :%retab<CR>
 nmenu Python.Syntax.Clean\ (;cl) :call PyClean()<CR>
 nmenu Python.Run.In\ term\ (ru) :update<CR>:python pyterm(vim.current.buffer.name, 0)<CR>
@@ -94,16 +110,10 @@ nmap <LocalLeader>sp :python keyword_split()<CR>
 nmap <F9> :python keyword_split()<CR>
 nmap <LocalLeader>he :python keyword_help()<CR>
 
-" what shall it be? two or four space indents?
 nmap <LocalLeader>us :call PyUseSpaces()<CR>
-nmap <LocalLeader>ug :call GoogleSpaces()<CR>
+nmap <LocalLeader>p2 :call Py2()<CR>
+nmap <LocalLeader>p3 :call Py3()<CR>
 
 nmap <LocalLeader>ts :%retab<CR>
 vmap <LocalLeader>ts :'<,'>retab<CR>
 nmap <LocalLeader>cl :call PyClean()<CR>
-
-map <LocalLeader>j :RopeGotoDefinition<CR>
-map <LocalLeader>r :RopeRename<CR>
-
-map <buffer> <F8> :call Flake8()<CR>
-
