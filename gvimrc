@@ -7,11 +7,11 @@ set visualbell
 set number
 
 set encoding=utf-8
-set guifont=Andale\ Mono\ 12
+set guifont=Andale\ Mono:h14
 
 " winpos 600 30
 
-set lines=71
+set lines=84
 set columns=106
 
 " Make command line two lines high

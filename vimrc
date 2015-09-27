@@ -1,9 +1,16 @@
 
-if has("python2") || has("python3")
+if has("python2")
+	python import sys
+	python import os
+	python import vim
+	python sys.argv = [vim.eval("v:progname")]
+endif
+
+if has("python3")
 	python3 import sys
 	python3 import os
 	python3 import vim
-	python3 sys.argv = [vim.eval("v:progname")] 
+	python3 sys.argv = [vim.eval("v:progname")]
 endif
 
 set nocompatible	" Use Vim defaults (much better!)
@@ -120,10 +127,10 @@ endif
 map <Leader>td <Plug>TaskList
 map <Leader>g :GundoToggle<CR>
 map <Leader>n :NERDTreeToggle<CR>
+map <Leader>sp :setlocal spell spelllang=en_us
+
 
 let g:snips_author = 'Keith Dart'
-let g:pyflakes_use_quickfix = 0
-let g:pep8_map='<leader>8'
 
 let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
