@@ -66,8 +66,6 @@ function! PyClean ()
     normal 'a
 endfunction
 
-nmenu Python.Syntax.Use\ Spaces :call PyUseSpaces()<CR>
-nmenu Python.Syntax.Use\ Google :call GoogleSpaces()<CR>
 nmenu Python.Syntax.No\ Tabs\ (:retab) :%retab<CR>
 nmenu Python.Syntax.Clean\ (;cl) :call PyClean()<CR>
 nmenu Python.Run.In\ term\ (ru) :update<CR>:python3 pyterm(vim.current.buffer.name, 0)<CR>
@@ -99,10 +97,6 @@ vmap <LocalLeader>vi :python3 visual_view()<CR>
 nmap <LocalLeader>sp :python3 keyword_split()<CR>
 nmap <F9> :python3 keyword_split()<CR>
 nmap <LocalLeader>he :python3 keyword_help()<CR>
-
-" what shall it be? two or four space indents?
-nmap <LocalLeader>us :call PyUseSpaces()<CR>
-nmap <LocalLeader>ug :call GoogleSpaces()<CR>
 
 nmap <LocalLeader>ts :%retab<CR>
 vmap <LocalLeader>ts :'<,'>retab<CR>

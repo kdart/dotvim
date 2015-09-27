@@ -113,7 +113,6 @@ nmap <LocalLeader>he :python keyword_help()<CR>
 nmap <LocalLeader>us :call PyUseSpaces()<CR>
 nmap <LocalLeader>p2 :call Py2()<CR>
 nmap <LocalLeader>p3 :call Py3()<CR>
-
 nmap <LocalLeader>ts :%retab<CR>
 vmap <LocalLeader>ts :'<,'>retab<CR>
 nmap <LocalLeader>cl :call PyClean()<CR>
