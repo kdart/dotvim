@@ -1,5 +1,5 @@
 
-if has("python2")
+if has("python")
 	python import sys
 	python import os
 	python import vim
@@ -26,8 +26,10 @@ set statusline=%<%f%m%r%y\ %{fugitive#statusline()}\ %=%b\ 0x%B\ \ %l,%c%V\ %P
 set laststatus=2  " always a status line
 
 set dir=~/.vim/tmp//
-set hidden
+set undodir=~/.vim/undo
+set undofile
 
+set hidden
 set incsearch
 set ignorecase
 set smartcase
@@ -93,7 +95,6 @@ augroup newfile
   autocmd BufNewFile            *.html  0r      ~/Templates/HTML5.html
   autocmd BufNewFile            *.xhtml 0r      ~/Templates/XHTML.xhtml
   autocmd BufNewFile            *.c     0r      ~/Templates/C.c
-  autocmd BufNewFile            *.py    0r      ~/Templates/Python.py
   autocmd BufNewFile            *.rst   0r      ~/Templates/RST.rst
 augroup END
 
@@ -148,11 +149,11 @@ map <Leader>g :GundoToggle<CR>
 map <Leader>n :NERDTreeToggle<CR>
 map <Leader>sp :setlocal spell spelllang=en_us
 
-
-let g:snips_author = 'Keith Dart'
-
 let g:UltiSnipsExpandTrigger="<c-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 let g:pylint_onwrite = 0
+
+runtime vimrc.local
+

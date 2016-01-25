@@ -7,8 +7,8 @@ if exists("g:Python_loaded")
   finish
 endif
 let g:Python_loaded = 1
-
 let g:pyindent_nested_paren = '&sw' * 2
+let g:pylint_onwrite = 0
 
 " set Vim parameters that suite python best
 set tm=2000
@@ -54,14 +54,18 @@ function Py2()
 	let g:pydoc_cmd = '/usr/bin/pydoc2.7'
     let $PYTHONBIN = "/usr/bin/python2.7"
     python devhelpers.PYTHONBIN = "/usr/bin/python2.7"
+  	autocmd BufNewFile            *.py    0r      ~/Templates/Python2.py
 endfunction
 
 function Py3()
-	let g:flake8_cmd=$HOME . "/bin/flake8-3.4"
-	let g:pydoc_cmd = "/usr/local/bin/pydoc3.4"
-    let $PYTHONBIN = "/usr/local/bin/python3.4"
-    python devhelpers.PYTHONBIN = "/usr/local/bin/python3.4"
+	let g:flake8_cmd=$HOME . "/bin/flake8-3.5"
+	let g:pydoc_cmd = "/usr/local/bin/pydoc3.5"
+    let $PYTHONBIN = "/usr/local/bin/python3.5"
+    python devhelpers.PYTHONBIN = "/usr/local/bin/python3.5"
+  	autocmd BufNewFile            *.py    0r      ~/Templates/Python3.py
 endfunction
+
+call Py2()
 
 function! PyClean ()
     normal ma
@@ -77,6 +81,8 @@ elseif firstline =~ 'python3'
     call Py3()
 endif
 
+nmenu Python.Dev.Python\ 2 :call Py2()<CR>
+nmenu Python.Dev.Python\ 3 :call Py3()<CR>
 nmenu Python.Syntax.Use\ Spaces :call PyUseSpaces()<CR>
 nmenu Python.Syntax.No\ Tabs\ (:retab) :%retab<CR>
 nmenu Python.Syntax.Clean\ (;cl) :call PyClean()<CR>

@@ -12,11 +12,19 @@ let g:pylint_onwrite = 0
 
 function Py2()
 	let g:flake8_cmd=$HOME . "/bin/flake8-2.7"
+  	autocmd BufNewFile            *.py    0r      ~/Templates/Python2.py
+    	let $PYTHONBIN = "/usr/bin/python2.7"
+    	python3 devhelpers.PYTHONBIN = "/usr/bin/python2.7"
 endfunction
 
 function Py3()
-	let g:flake8_cmd=$HOME . "/bin/flake8-3.4"
+	let g:flake8_cmd=$HOME . "/bin/flake8-3.5"
+  	autocmd BufNewFile            *.py    0r      ~/Templates/Python3.py
+    	let $PYTHONBIN = "/usr/local/bin/python3.5"
+    	python3 devhelpers.PYTHONBIN = "/usr/local/bin/python3.5"
 endfunction
+
+call Py3()
 
 " set Vim parameters that suite python best
 set tm=2000
@@ -66,6 +74,15 @@ function! PyClean ()
     normal 'a
 endfunction
 
+let firstline = getline(1)
+if firstline =~ 'python2'
+    call Py2()
+elseif firstline =~ 'python3'
+    call Py3()
+endif
+
+nmenu Python.Dev.Python\ 2 :call Py2()<CR>
+nmenu Python.Dev.Python\ 3 :call Py3()<CR>
 nmenu Python.Syntax.No\ Tabs\ (:retab) :%retab<CR>
 nmenu Python.Syntax.Clean\ (;cl) :call PyClean()<CR>
 nmenu Python.Run.In\ term\ (ru) :update<CR>:python3 pyterm(vim.current.buffer.name, 0)<CR>

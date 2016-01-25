@@ -2,3 +2,5 @@ tags
 viminfo
 __pycache__
 *.pyc
+vimrc.local
+gvimrc.local
