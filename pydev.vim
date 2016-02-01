@@ -10,18 +10,24 @@ let g:Python_loaded = 1
 let g:pyindent_nested_paren = '&sw' * 2
 let g:pylint_onwrite = 0
 
+python3 import os
+python3 from vimlib.pydev import *
+python3 from vimlib import devhelpers
+
 function Py2()
-	let g:flake8_cmd=$HOME . "/bin/flake8-2.7"
-  	autocmd BufNewFile            *.py    0r      ~/Templates/Python2.py
-    	let $PYTHONBIN = "/usr/bin/python2.7"
-    	python3 devhelpers.PYTHONBIN = "/usr/bin/python2.7"
+    autocmd! newfile BufNewFile            *.py    0r      ~/Templates/Python2.py
+    let g:flake8_cmd = exepath("flake8-2.7")
+    let g:pydoc_cmd = exepath("pydoc2.7")
+    let $PYTHONBIN = exepath("python2.7")
+    python3 devhelpers.PYTHONBIN = os.environ["PYTHONBIN"]
 endfunction
 
 function Py3()
-	let g:flake8_cmd=$HOME . "/bin/flake8-3.5"
-  	autocmd BufNewFile            *.py    0r      ~/Templates/Python3.py
-    	let $PYTHONBIN = "/usr/local/bin/python3.5"
-    	python3 devhelpers.PYTHONBIN = "/usr/local/bin/python3.5"
+    autocmd! newfile BufNewFile            *.py    0r      ~/Templates/Python3.py
+    let g:flake8_cmd = exepath("flake8-3.5")
+    let g:pydoc_cmd = exepath("pydoc3.5")
+    let $PYTHONBIN = exepath("python3.5")
+    python3 devhelpers.PYTHONBIN = os.environ["PYTHONBIN"]
 endfunction
 
 call Py3()
@@ -31,11 +37,6 @@ set tm=2000
 
 set foldmethod=indent
 set foldlevel=99
-
-" set omnifunc=pythoncomplete#Complete
-" let g:SuperTabDefaultCompletionType = "context"
-" let g:pydoc_cmd = '/usr/bin/pydoc2.7'
-" set completeopt=menuone,longest,preview
 
 set formatoptions=crql cino=(8#1 ai smartindent nowrap comments=:#
 set cinwords=if,elif,else,for,while,try,except,finally,def,class,with
@@ -60,8 +61,6 @@ endfunction
 :call PyUseSpaces()
 
 
-:python3 import os
-:python3 from vimlib.pydev import *
 " put VIMSERVER in environment for child python processes to use.
 if has("gui_gtk") && has("gui_running")
     :py3 os.environ["VIMSERVER"] = vim.eval("v:servername")
