@@ -38,9 +38,10 @@ if v:progname == "Vim" || v:progname == "mvim"
 	map ZZ :bd<CR>
 endif
 
+runtime gvimrc.local
+
 if &diff
    set columns=212
    nmap ZZ :qall<CR>
 endif
 
-runtime gvimrc.local

@@ -96,6 +96,7 @@ augroup newfile
   autocmd BufNewFile            *.xhtml 0r      ~/Templates/XHTML.xhtml
   autocmd BufNewFile            *.c     0r      ~/Templates/C.c
   autocmd BufNewFile            *.rst   0r      ~/Templates/RST.rst
+  autocmd BufNewFile            *.py    0r      ~/Templates/Python3.py
 augroup END
 
 function UseSpaces()
@@ -112,11 +113,9 @@ function UseTabs()
     :set listchars=trail:■ nolist
 endfunction
 
-
 " what shall it be? two or four space indents?
 nmap <Leader>us :call UseSpaces()<CR>
 nmap <Leader>ut :call UseTabs()<CR>
-
 
 " mvim is a symlink to gvim that's short for multi-buffer gvim
 if v:progname == "mvim"

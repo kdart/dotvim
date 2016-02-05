@@ -15,7 +15,6 @@ python3 from vimlib.pydev import *
 python3 from vimlib import devhelpers
 
 function Py2()
-    autocmd! newfile BufNewFile            *.py    0r      ~/Templates/Python2.py
     let g:flake8_cmd = exepath("flake8-2.7")
     let g:pydoc_cmd = exepath("pydoc2.7")
     let $PYTHONBIN = exepath("python2.7")
@@ -23,7 +22,6 @@ function Py2()
 endfunction
 
 function Py3()
-    autocmd! newfile BufNewFile            *.py    0r      ~/Templates/Python3.py
     let g:flake8_cmd = exepath("flake8-3.5")
     let g:pydoc_cmd = exepath("pydoc3.5")
     let $PYTHONBIN = exepath("python3.5")
