@@ -229,7 +229,7 @@ if !exists("python_no_exception_highlight")
   syn keyword pythonExceptions	UserWarning Warning ResourceWarning
   " control flow exceptions
   syn keyword pythonExceptions	GeneratorExit KeyboardInterrupt StopIteration
-  syn keyword pythonExceptions	SystemExit
+  syn keyword pythonExceptions	SystemExit StopAsyncIteration
 endif
 
 syn keyword pyBuiltinVariable  __bases__ __class__ __doc__ __slots__
@@ -239,7 +239,7 @@ syn keyword pyBuiltinVariable  __spec__
 
 " all of the special methods. So you know you got the right one. 8-)
 syn keyword pySpecialMethod __abs__ __add__ __and__ __bytes__ __call__
-syn keyword pySpecialMethod __await__ __aenter__ __aexit__ __aiter__
+syn keyword pySpecialMethod __await__ __aenter__ __aexit__ __aiter__ __anext__
 syn keyword pySpecialMethod __closure__ __cmp__ __code__ __del__ __getstate__
 syn keyword pySpecialMethod __setstate__ __complex__ __coerce__ __contains__
 syn keyword pySpecialMethod __defaults__ __delattr__ __delitem__ __delslice__
@@ -266,8 +266,7 @@ syn keyword pySpecialMethod __dictoffset__ __flags__ __floor__ __getformat__
 syn keyword pySpecialMethod __instancecheck__ __itemsize__ __mro__ __prepare__
 syn keyword pySpecialMethod __qualname__ __round__ __setformat__
 syn keyword pySpecialMethod __subclasscheck__ __subclasses__
-syn keyword pySpecialMethod __text_signature__ __weakrefoffset__
-syn keyword pySpecialMethod __missing__
+syn keyword pySpecialMethod __text_signature__ __weakrefoffset__ __missing__
 
 
 " Names used by convention, such as self, that are often boilerplate and can
