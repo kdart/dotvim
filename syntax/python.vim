@@ -109,6 +109,9 @@ syn region  pythonRawString
 syn region  pythonRawString
       \ start=+[uU]\=[rR]\z('''\|"""\)+ end="\z1" keepend
       \ contains=pythonSpaceError,pythonDoctest,@Spell
+syn region  pythonFormattedString
+      \ start=+[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+      \ contains=@Spell
 
 syn match   pythonEscape	+\\[abfnrtv'"\\]+ contained
 syn match   pythonEscape	"\\\o\{1,3}" contained
@@ -245,7 +248,7 @@ syn keyword pySpecialMethod __setstate__ __complex__ __coerce__ __contains__
 syn keyword pySpecialMethod __defaults__ __delattr__ __delitem__ __delslice__
 syn keyword pySpecialMethod __dict__ __div__ __divmod__ __enter__ __eq__
 syn keyword pySpecialMethod __exit__ __float__ __floordiv__ __format__ __ge__
-syn keyword pySpecialMethod __get__ __getattribute__ __getitem__
+syn keyword pySpecialMethod __get__ __getattribute__ __getitem__ __set__
 syn keyword pySpecialMethod __getnewargs__ __getslice__ __globals__ __gt__
 syn keyword pySpecialMethod __hash__ __hex__ __iadd__ __iand__ __imul__
 syn keyword pySpecialMethod __index__ __init__ __int__ __invert__ __ior__
@@ -267,6 +270,7 @@ syn keyword pySpecialMethod __instancecheck__ __itemsize__ __mro__ __prepare__
 syn keyword pySpecialMethod __qualname__ __round__ __setformat__
 syn keyword pySpecialMethod __subclasscheck__ __subclasses__
 syn keyword pySpecialMethod __text_signature__ __weakrefoffset__ __missing__
+syn keyword pySpecialMethod __init_subclass__ __set_name__
 
 
 " Names used by convention, such as self, that are often boilerplate and can
@@ -326,6 +330,7 @@ if version >= 508 || !exists("did_python_syn_inits")
   HiLink pythonTodo		Todo
   HiLink pythonString		String
   HiLink pythonRawString	String
+  HiLink pythonFormattedString	String
   HiLink pythonEscape		Special
   HiLink pyDebug             Debug
   HiLink pyConvention             Ignore
