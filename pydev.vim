@@ -6,6 +6,7 @@ endif
 if exists("g:Python_loaded")
   finish
 endif
+
 let g:Python_loaded = 1
 let g:pyindent_nested_paren = '&sw' * 2
 let g:pylint_onwrite = 0
@@ -22,9 +23,9 @@ function Py2()
 endfunction
 
 function Py3()
-    let g:flake8_cmd = exepath("flake8-3.5")
-    let g:pydoc_cmd = exepath("pydoc3.5")
-    let $PYTHONBIN = exepath("python3.5")
+    let g:flake8_cmd = exepath("flake8-3.6")
+    let g:pydoc_cmd = exepath("pydoc3.6")
+    let $PYTHONBIN = exepath("python3.6")
     python3 devhelpers.PYTHONBIN = os.environ["PYTHONBIN"]
 endfunction
 

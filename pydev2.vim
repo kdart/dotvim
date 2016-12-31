@@ -58,10 +58,10 @@ function Py2()
 endfunction
 
 function Py3()
-	let g:flake8_cmd=$HOME . "/bin/flake8-3.5"
-	let g:pydoc_cmd = "/usr/local/bin/pydoc3.5"
-    let $PYTHONBIN = "/usr/local/bin/python3.5"
-    python devhelpers.PYTHONBIN = "/usr/local/bin/python3.5"
+	let g:flake8_cmd=$HOME . "/bin/flake8-3.6"
+	let g:pydoc_cmd = "/usr/local/bin/pydoc3.6"
+    let $PYTHONBIN = "/usr/local/bin/python3.6"
+    python devhelpers.PYTHONBIN = "/usr/local/bin/python3.6"
   	autocmd BufNewFile            *.py    0r      ~/Templates/Python3.py
 endfunction
 
