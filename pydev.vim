@@ -77,6 +77,8 @@ if firstline =~ 'python2'
     call Py2()
 elseif firstline =~ 'python3'
     call Py3()
+elseif firstline =~ 'python'
+    call Py2()
 endif
 
 nmenu Python.Dev.Python\ 2 :call Py2()<CR>
@@ -119,5 +121,3 @@ nmap <LocalLeader>cl :call PyClean()<CR>
 
 map <LocalLeader>j :RopeGotoDefinition<CR>
 map <LocalLeader>r :RopeRename<CR>
-
-

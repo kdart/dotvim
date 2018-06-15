@@ -75,8 +75,9 @@ filetype indent on
 
 autocmd FileType * set formatoptions=tcql nocindent comments&
 
-augroup cprog
+augroup sources
   autocmd FileType c,cpp  :ru cdev.vim
+  autocmd FileType java  :ru java.vim
 augroup END
 
 augroup pydev
